@@ -45,25 +45,14 @@ public class GreenEnemy : MonoBehaviour
         rb.velocity = velocity;
         transform.eulerAngles = Vector3.forward;
     }
-    //private void Catch()
-    //{
-    //    if (distance < 2)
-    //    {
 
-    //        accelerationSpeed = 0;
-    //        //enemyAnimator.SetTrigger("Catch");
-    //        transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.1f);
-    //        Debug.Log("sad");
-    //    }
-    //}
     private IEnumerator Catch()
     {
         gameOver = true;
         accelerationSpeed = 0;
-        player.GameOver();
-        //enemyAnimator.SetTrigger("Catch");
-        Debug.Log("sad");
-        float time = 0.3f;
+        player.Caught();
+        enemyAnimator.SetTrigger("Catch");
+        float time = 0.5f;
         float elapsedTime = 0;
         Vector3 startPosition = transform.position;
         Vector3 endPosition = player.transform.position;

@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float rotationSpeed;
     public float maxAngle;
 
+    public bool GameOver { get => gameOver;}
+
     private void FixedUpdate()
     {
         if (gameOver)
@@ -60,10 +62,12 @@ public class PlayerMovement : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-    public void GameOver()
+
+    public void Caught()
     {
-        gameOver = true;
         accelerationSpeed = 0;
+        playerAnimator.SetTrigger("Caught");
+        gameOver = true;
     }
 }
 

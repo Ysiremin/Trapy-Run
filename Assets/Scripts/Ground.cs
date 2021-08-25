@@ -30,7 +30,7 @@ public class Ground : MonoBehaviour
     private IEnumerator Fall()
     {
         yield return new WaitForSeconds(0.1f);
-        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime); // Buradan devam
+        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
         fallSpeed += 0.5f;
     }
 }
