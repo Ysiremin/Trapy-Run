@@ -7,6 +7,7 @@ public class GreenEnemy : MonoBehaviour
     [SerializeField] private PlayerMovement player;
     [SerializeField] private Animator enemyAnimator;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private RaysAndDetections raysAndDetections;
 
     private float accelerationSpeed = 300;
     private float distance;
@@ -25,15 +26,20 @@ public class GreenEnemy : MonoBehaviour
         {
             StartCoroutine(Catch());
         }
+
+        if (!raysAndDetections.IsLeftDownGround() && !raysAndDetections.IsRightDownGround())
+        {
+            StartCoroutine(Die());
+        }
     }
 
     private void Movement()
     {
-        if (distance > 7)
+        if (distance > 5)
         {
             accelerationSpeed = (player.accelerationSpeed + 100);
         }
-        else if (distance <= 7)
+        else if (distance <= 5)
         {
             accelerationSpeed = (player.accelerationSpeed + 50);
         }
@@ -58,10 +64,19 @@ public class GreenEnemy : MonoBehaviour
         Vector3 endPosition = player.transform.position;
         while (elapsedTime <= time)
         {
+            endPosition = player.transform.position;
             transform.position = Vector3.Lerp(startPosition, endPosition, elapsedTime / time);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         transform.position = endPosition;
+    }
+    private IEnumerator Die()
+    {
+        Debug.Log(transform.name + "i died");
+        gameOver = true;
+        accelerationSpeed = 0;
+        yield return new WaitForSeconds(0.5f);
+        enemyAnimator.SetTrigger("Fall");
     }
 }

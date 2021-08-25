@@ -12,7 +12,7 @@ public class Ground : MonoBehaviour
     private void Start()
     {
         rnd = transform.GetComponent<Renderer>();
-        fallingColor = Color.Lerp(Color.white, Color.red, 0.6f);
+        fallingColor = Color.Lerp(Color.white, Color.red, 0.55f);
         fallSpeed = 0.5f;
     }
     private void Update()
@@ -31,6 +31,6 @@ public class Ground : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
-        fallSpeed += 0.5f;
+        fallSpeed += 0.2f;
     }
 }
