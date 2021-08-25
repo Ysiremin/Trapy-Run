@@ -8,12 +8,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Animator playerAnimator;
 
+    private bool gameOver;
     public float accelerationSpeed;
     public float rotationSpeed;
     public float maxAngle;
 
     private void FixedUpdate()
     {
+        if (gameOver)
+        {
+            return;
+        }
+
         Movement();
         RotateCharacter();
     }
@@ -53,6 +59,11 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.angularVelocity = Vector3.zero;
         }
+    }
+    public void GameOver()
+    {
+        gameOver = true;
+        accelerationSpeed = 0;
     }
 }
 
